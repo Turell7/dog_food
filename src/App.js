@@ -1,25 +1,40 @@
-import logo from './logo.svg';
-import './App.css';
+// import { useState } from 'react'
+// import { useEffect, useState } from 'react'
+import './App.css'
+import { Footer } from './conmponents/Footer'
+import { Header } from './conmponents/Header'
+import { Main } from './conmponents/Main'
+// import { Api } from './conmponents/Api/Api'
+
+// import { RequireAuth } from './hoc/RequireAuth'
+import { AuthProvider } from './hoc/AuthProvider'
 
 function App() {
+  // const [user, setUser] = useState(localStorage.getItem('userData'))
+  // const [token, setToken] = useState(localStorage.getItem('token'))
+  // const [api, setApi] = useState(new Api(token))
+
+  // console.log(api)
+  // useEffect(() => {
+  //   console.log('Change token')
+  //   setApi(new Api(token))
+  //   setUser(localStorage.getItem('user'))
+  // }, [token])
+  // useEffect(() => {
+  //   if (!user) {
+  //     localStorage.removeItem('token')
+  //     setToken(null)
+  //   }
+  // }, [user])
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <AuthProvider>
+      <div className="wrapper-app">
+        <Header />
+        <Main />
+        <Footer />
+      </div>
+    </AuthProvider>
+  )
 }
 
-export default App;
+export default App
