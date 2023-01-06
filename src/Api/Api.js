@@ -58,6 +58,19 @@ class Api {
       throw new Error(Error)
     }
   }
+
+  async getInfoAboutMe(token) {
+    try {
+      const res = await fetch(`${this.path}/v2/sm8/users/me`, {
+        headers: {
+          authorization: `Bearer ${token}`,
+        },
+      })
+      return res.json()
+    } catch (Error) {
+      throw new Error(Error)
+    }
+  }
 }
 
 const api = new Api()

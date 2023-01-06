@@ -1,22 +1,35 @@
+import { useQuery } from '@tanstack/react-query'
 import { Link, Navigate } from 'react-router-dom'
+import { api } from '../../Api/Api'
 import { useAuth } from '../../hook/useAuth'
 
-export function Profile() {
-  const { user, logOut } = useAuth()
+export const USER_QUERY_KEY = ['USER_QUERY_KEY']
 
-  if (!user) return <Navigate to="/" />
+export function Profile() {
+  const { token, logOut } = useAuth()
+  const getInfoAboutMe = () => api.getInfoAboutMe(token)
+
+  if (!token) return <Navigate to="/" />
+
+  const { data } = useQuery({
+    queryKey: USER_QUERY_KEY,
+    queryFn: getInfoAboutMe,
+  })
+  console.log({ data })
 
   return (
     <div className="my-10">
+      {data
+      && (
       <div className="bg-white rounded overflow-hidden shadow-lg">
         <div className="text-center p-6  border-b">
           <div className="avatar">
             <div className="w-24 mask mask-squircle">
-              <img src={user.avatar} alt="avatar" />
+              <img src={data.avatar} alt="avatar" />
             </div>
           </div>
-          <p className="pt-2 text-lg font-semibold">{user.name}</p>
-          <p className="text-sm text-gray-600">{user.email}</p>
+          <p className="pt-2 text-lg font-semibold">{data.name}</p>
+          <p className="text-sm text-gray-600">{data.email}</p>
           <div className="mt-5">
             <Link
               to="/profile"
@@ -43,7 +56,7 @@ export function Profile() {
             </div>
             <div className="pl-3">
               <p className="text-sm font-medium text-gray-800 leading-none">Status</p>
-              <p className="text-xs text-gray-500">{user.about}</p>
+              <p className="text-xs text-gray-500">{data.about}</p>
             </div>
           </div>
           <div className="px-4 py-2 hover:bg-gray-100 flex">
@@ -82,6 +95,8 @@ export function Profile() {
           </div>
         </div>
       </div>
+      )}
+
     </div>
   )
 }

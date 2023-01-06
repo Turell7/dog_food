@@ -1,3 +1,4 @@
+import { useMutation, useQueryClient } from '@tanstack/react-query'
 import {
   ErrorMessage, Field, Form, Formik,
 } from 'formik'
@@ -8,6 +9,8 @@ import { useAuth } from '../../../hook/useAuth'
 import { Alert } from '../../Alert'
 import { REQUIRED_ERROR_MESSAGE } from '../constants'
 
+export const LOGIN_QUERY_KEY = ['USER_QUERY_KEY']
+
 export function LogIn({ change, submitAdditionAction }) {
   const [message, setMessage] = useState('')
 
@@ -17,6 +20,29 @@ export function LogIn({ change, submitAdditionAction }) {
     const { message: errorMessage } = answer
     setMessage(errorMessage)
   }
+  // eslint-disable-next-line no-debugger
+  debugger
+  const userSignIn = (values) => api.userSignIn(values)
+    .then((res) => {
+      if (!res.err) {
+        saveUserDataAndToken(res)
+        submitAdditionAction()
+      } else {
+        errorHandler(res)
+      }
+    })
+
+  const queryClient = useQueryClient()
+
+  const { mutate } = useMutation({
+    mutationFn: userSignIn,
+    onSubmit: () => {
+      queryClient.invalidateQueries({ queryKey: LOGIN_QUERY_KEY })
+    },
+
+  })
+
+  console.log({ mutate })
 
   return (
     <Formik
@@ -35,17 +61,7 @@ export function LogIn({ change, submitAdditionAction }) {
             .max(20, 'Must be 20 characters or less'),
         },
       )}
-      onSubmit={(values) => {
-        api.userSignIn(values)
-          .then((res) => {
-            if (!res.err) {
-              saveUserDataAndToken(res)
-              submitAdditionAction()
-            } else {
-              errorHandler(res)
-            }
-          })
-      }}
+      onSubmit={mutate}
     >
       <Form className="card-body">
         { message && <Alert message={message} />}

@@ -1,3 +1,4 @@
+import { useMutation, useQueryClient } from '@tanstack/react-query'
 import {
   ErrorMessage, Field, Form, Formik,
 } from 'formik'
@@ -7,12 +8,32 @@ import { api } from '../../../Api/Api'
 import { Alert } from '../../Alert'
 import { REQUIRED_ERROR_MESSAGE } from '../constants'
 
+export const SIGNUP_QUERY_KEY = ['SIGNUP_QUERY_KEY']
+
 export function SignUp({ change, submitAdditionAction }) {
   const [message, setMessage] = useState('')
   const errorHandler = (answer) => {
     const { message: errorMessage } = answer
     setMessage(errorMessage)
   }
+
+  const userSignUp = (values) => api.userSignUp(values)
+    .then((res) => {
+      if (!res.err) {
+        submitAdditionAction()
+      } else {
+        errorHandler(res)
+      }
+    })
+
+  const queryClient = useQueryClient()
+
+  const { mutate } = useMutation({
+    mutationFn: userSignUp,
+    onSubmit: () => {
+      queryClient.invalidateQueries({ queryKey: SIGNUP_QUERY_KEY })
+    },
+  })
 
   return (
     <Formik
@@ -31,16 +52,7 @@ export function SignUp({ change, submitAdditionAction }) {
             .max(20, 'Must be 20 characters or less'),
         },
       )}
-      onSubmit={(values) => {
-        api.userSignUp(values)
-          .then((res) => {
-            if (!res.err) {
-              submitAdditionAction()
-            } else {
-              errorHandler(res)
-            }
-          })
-      }}
+      onSubmit={mutate}
     >
       <Form className="card-body">
         { message && <Alert message={message} />}
