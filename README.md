@@ -2,7 +2,7 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Link for demo: [https://dog-food-ruby.vercel.app/](https://dog-food-ruby.vercel.app/)
+## Link for demo: [https://dog-food-turell7.vercel.app/](https://dog-food-turell7.vercel.app/)
 
 ### `npm start`
 
