@@ -20,8 +20,6 @@ export function LogIn({ change, submitAdditionAction }) {
     const { message: errorMessage } = answer
     setMessage(errorMessage)
   }
-  // eslint-disable-next-line no-debugger
-  debugger
   const userSignIn = (values) => api.userSignIn(values)
     .then((res) => {
       if (!res.err) {
