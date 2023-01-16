@@ -39,9 +39,6 @@ export function LogIn({ change, submitAdditionAction }) {
     },
 
   })
-
-  console.log({ mutate })
-
   return (
     <Formik
       initialValues={{
