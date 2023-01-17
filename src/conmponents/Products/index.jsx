@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query'
 import { useSelector } from 'react-redux'
 import { api } from '../../Api/Api'
-import { useAuth } from '../../hook/useAuth'
+import { useAuth } from '../../hooks/useAuth'
 import { Loader } from '../Loader'
 import { Product } from '../Product'
 import { SortProductsBar } from '../SortProductsBar'
@@ -10,9 +10,11 @@ import { sortProducts } from './sortProducts'
 export const PRODUCTS_QUERY_KEY = ['PRODUCTS_QUERY_KEY']
 
 export function Products() {
+  const search = useSelector((store) => store.search.value)
+  const getProductsQueryKey = () => PRODUCTS_QUERY_KEY.concat(Object.values(search))
+
   const sortValue = useSelector((store) => store.sort.value)
   const { token } = useAuth()
-  // console.log({ sortValue })
   if (!token) {
     return (
       <div>
@@ -21,25 +23,23 @@ export function Products() {
     )
   }
 
-  const getAllProducts = () => api.getAllProducts(token)
+  const getAllProducts = () => api.getAllProducts(token, search)
 
-  const { data: products, isLoading } = useQuery({
-    queryKey: PRODUCTS_QUERY_KEY,
+  const { data, isLoading } = useQuery({
+    queryKey: getProductsQueryKey(search),
     queryFn: getAllProducts,
   })
 
   if (isLoading) return <Loader />
 
-  // console.log('TEST')
-  sortProducts(products.products, sortValue)
+  const products = search !== '' ? data : data.products
 
-  console.log({ products })
-
+  sortProducts(products, sortValue)
   return (
     <>
-      {products.products.length && <SortProductsBar />}
+      {products.length && <SortProductsBar />}
       <div className="grid gap-4 grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-        {products?.products.map((product) => (
+        {products?.map((product) => (
           <Product
             key={product.created_at}
             name={product.name}

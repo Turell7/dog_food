@@ -4,7 +4,7 @@ import stylesNavBar from './styles.module.scss'
 import { ReactComponent as FavoriteIcon } from './img/ic-favorites.svg'
 import { ReactComponent as BasketIcon } from './img/ic-basket.svg'
 import { Modal } from '../Modal/Index'
-import { useAuth } from '../../hook/useAuth'
+import { useAuth } from '../../hooks/useAuth'
 import { Auth } from '../forms/Auth'
 
 export function NavBar() {

@@ -1,7 +1,7 @@
 import { createBrowserRouter } from 'react-router-dom'
-import App from '../../App'
-import { Products } from '../Products'
-import { Profile } from '../Profile'
+import App from '../App'
+import { Products } from '../conmponents/Products'
+import { Profile } from '../conmponents/Profile'
 
 export const router = createBrowserRouter([
   {

@@ -2,11 +2,24 @@ class Api {
   constructor() {
     this.path = 'https://api.react-learning.ru'
     this.group = 'sm8'
+    // this.token = ''
   }
 
-  async getAllProducts(token) {
+  // setNewToken(newToken) {
+  //   this.token = newToken
+  // }
+
+  async getAllProducts(token, search) {
     try {
-      const res = await fetch(`${this.path}/products`, {
+      if (search === '') {
+        const res = await fetch(`${this.path}/products`, {
+          headers: {
+            authorization: `Bearer ${token}`,
+          },
+        })
+        return res.json()
+      }
+      const res = await fetch(`${this.path}/products/search?query=${search}`, {
         headers: {
           authorization: `Bearer ${token}`,
         },

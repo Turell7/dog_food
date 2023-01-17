@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query'
 import { Link, Navigate } from 'react-router-dom'
 import { api } from '../../Api/Api'
-import { useAuth } from '../../hook/useAuth'
+import { useAuth } from '../../hooks/useAuth'
 
 export const USER_QUERY_KEY = ['USER_QUERY_KEY']
 
