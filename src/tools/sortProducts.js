@@ -1,4 +1,4 @@
-import { sortValues } from '../../redux/slices/sortProductsSlice/sortProductsSlice'
+import { sortValues } from '../redux/slices/sortProductsSlice/sortProductsSlice'
 
 const getProductsCreatedTimestamp = (timestamp) => {
   const date = new Date(timestamp)

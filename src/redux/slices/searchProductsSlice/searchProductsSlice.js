@@ -1,13 +1,10 @@
 /* eslint-disable no-param-reassign */
 import { createSlice } from '@reduxjs/toolkit'
-
-const initialState = {
-  value: '',
-}
+import { getInitialState } from '../../initState'
 
 const searchProductsSlice = createSlice({
   name: 'search',
-  initialState,
+  initialState: getInitialState().search,
   reducers: {
     setSearch: (state, action) => {
       state.value = action.payload

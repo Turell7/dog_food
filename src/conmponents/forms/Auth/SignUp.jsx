@@ -4,7 +4,7 @@ import {
 } from 'formik'
 import { useState } from 'react'
 import * as Yup from 'yup'
-import { api } from '../../../Api/Api'
+import { api } from '../../../tools/Api'
 import { Alert } from '../../Alert'
 import { REQUIRED_ERROR_MESSAGE } from '../constants'
 

@@ -1,6 +1,21 @@
+import { useDispatch } from 'react-redux'
+import { addItem } from '../../redux/slices/cartSlice/cartSlice'
+
 export function Product({
-  createdAt, name, img, price, tags, stock,
+  id, createdAt, name, img, price, tags, stock,
 }) {
+  const dispatch = useDispatch()
+
+  const onClickAdd = () => {
+    const item = {
+      id,
+      name,
+      price,
+      img,
+    }
+    dispatch(addItem(item))
+  }
+
   return (
     <div className="card card-compact drop-shadow-xl shadow">
       {/* Загатовка на переделку бейджеков */}
@@ -34,7 +49,7 @@ export function Product({
         </h2>
         <div className="card-actions justify-end">
           <button type="button" className="btn btn-sm btn-outline btn-secondary">Detail</button>
-          <button type="button" className="btn btn-sm btn-outline btn-secondary">Add to cart</button>
+          <button onClick={onClickAdd} type="button" className="btn btn-sm btn-outline btn-secondary">Add to cart</button>
         </div>
       </div>
     </div>

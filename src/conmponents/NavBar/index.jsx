@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import { useCallback, useState } from 'react'
+import { useSelector } from 'react-redux'
 import stylesNavBar from './styles.module.scss'
 import { ReactComponent as FavoriteIcon } from './img/ic-favorites.svg'
 import { ReactComponent as BasketIcon } from './img/ic-basket.svg'
@@ -8,6 +9,8 @@ import { useAuth } from '../../hooks/useAuth'
 import { Auth } from '../forms/Auth'
 
 export function NavBar() {
+  const { items, totalPrice } = useSelector((state) => state.cart)
+
   const [isModalOpen, setIsModalOpen] = useState(false)
   const { user, logOut } = useAuth()
 
@@ -31,19 +34,31 @@ export function NavBar() {
         </li>
 
         <li className="dropdown dropdown-end">
-          <Link to="/" className="btn btn-ghost btn-circle">
+          <button className="btn btn-ghost btn-circle" type="button">
             <div className="indicator">
               <BasketIcon />
-              <span className="badge badge-sm indicator-item">3</span>
+              <span className="badge badge-sm indicator-item">{items.length}</span>
             </div>
-          </Link>
+          </button>
           <div className="mt-3 card card-compact dropdown-content w-52 bg-base-100 shadow">
             <div className="card-body">
-              <span className="font-bold text-lg">8 Items</span>
-              <span className="text-info">Subtotal: 999₽</span>
-              <div className="card-actions">
+              <span className="font-bold text-lg">
+                {items.length}
+                {' '}
+                Items
+              </span>
+              <span className="text-info">
+                Subtotal:
+                {' '}
+                {totalPrice}
+                ₽
+              </span>
+              {/* <div className="card-actions">
                 <button type="button" className="btn btn-primary btn-block">View cart</button>
-              </div>
+              </div> */}
+              <Link to="/cart" className="btn btn-primary btn-block">
+                View cart
+              </Link>
             </div>
           </div>
         </li>

@@ -1,5 +1,6 @@
 /* eslint-disable no-param-reassign */
 import { createSlice } from '@reduxjs/toolkit'
+import { getInitialState } from '../../initState'
 
 export const sortValues = {
   POPULAR: 'POPULAR',
@@ -10,13 +11,9 @@ export const sortValues = {
   DISCOUNT: 'DISCOUNT',
 }
 
-const initialState = {
-  value: '',
-}
-
 const sortProductsSlice = createSlice({
   name: 'sort',
-  initialState,
+  initialState: getInitialState().sort,
   reducers: {
     setSort: (state, action) => {
       state.value = action.payload
