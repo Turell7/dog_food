@@ -5,15 +5,15 @@ import stylesNavBar from './styles.module.scss'
 import { ReactComponent as FavoriteIcon } from './img/ic-favorites.svg'
 import { ReactComponent as BasketIcon } from './img/ic-basket.svg'
 import { Modal } from '../Modal/Index'
-import { useAuth } from '../../hooks/useAuth'
+// import { useAuth } from '../../hooks/useAuth'
 import { Auth } from '../forms/Auth'
 
 export function NavBar() {
   const { items, totalPrice } = useSelector((state) => state.cart)
 
   const [isModalOpen, setIsModalOpen] = useState(false)
-  const { user, logOut } = useAuth()
-
+  // const { user, logOut } = useAuth()
+  const { user } = useSelector((store) => store.user)
   const openModal = () => {
     setIsModalOpen(true)
   }
@@ -79,9 +79,9 @@ export function NavBar() {
               </Link>
             </li>
             <li>
-              <button onClick={logOut} type="button" className="justify-between">
+              {/* <button onClick={logOut} type="button" className="justify-between">
                 Log out
-              </button>
+              </button> */}
             </li>
 
           </ul>

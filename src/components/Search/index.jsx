@@ -21,7 +21,6 @@ export function Search() {
 
   useEffect(() => {
     setsearchState(debounceValue)
-    console.log('test')
   }, [debounceValue])
 
   // const dispatch = useDispatch()

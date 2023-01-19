@@ -12,6 +12,7 @@ export function Product({
       name,
       price,
       img,
+      stock,
     }
     dispatch(addItem(item))
   }

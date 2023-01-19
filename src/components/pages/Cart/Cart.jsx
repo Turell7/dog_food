@@ -1,7 +1,10 @@
+import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { CartImtem } from '../../CartItem'
+import { CartItem } from '../../CartItem'
 
 export function Cart() {
+  const { items } = useSelector((state) => state.cart)
+
   return (
     <div className="bg-gray-100">
       <div className="container mx-auto mt-10">
@@ -9,7 +12,11 @@ export function Cart() {
           <div className="w-3/4 bg-white px-10 py-10">
             <div className="flex justify-between border-b pb-8">
               <h1 className="font-semibold text-2xl">Shopping Cart</h1>
-              <h2 className="font-semibold text-2xl">3 Items</h2>
+              <h2 className="font-semibold text-2xl">
+                {items.length}
+                {' '}
+                Items
+              </h2>
             </div>
 
             <div className="flex mt-10 mb-5">
@@ -27,9 +34,17 @@ export function Cart() {
               </div>
             </div>
 
-            <CartImtem />
-            <CartImtem />
-            <CartImtem />
+            {items?.map((item) => (
+              <CartItem
+                key={item.id}
+                id={item.id}
+                name={item.name}
+                img={item.pictures}
+                price={item.price}
+                stock={item.stock}
+                count={item.count}
+              />
+            ))}
 
             <Link to="/" className="flex font-semibold text-indigo-600 text-sm mt-10">
 
@@ -41,20 +56,14 @@ export function Cart() {
           <div id="summary" className="w-1/4 px-8 py-10">
             <h1 className="font-semibold text-2xl border-b pb-8">Order Summary</h1>
             <div className="flex justify-between mt-10 mb-5">
-              <span className="font-semibold text-sm uppercase">Items 3</span>
+              <span className="font-semibold text-sm uppercase">
+                Items
+                {' '}
+                {items.length}
+              </span>
               <span className="font-semibold text-sm">590$</span>
             </div>
-            <div>
-              <la className="font-medium inline-block mb-3 text-sm uppercase">Shipping</la>
-              <select className="block p-2 text-gray-600 w-full text-sm">
-                <option>Standard shipping - $10.00</option>
-              </select>
-            </div>
-            <div className="py-10">
-              <div htmlFor="promo" className="font-semibold inline-block mb-3 text-sm uppercase">Promo Code</div>
-              <input type="text" id="promo" placeholder="Enter your code" className="p-2 text-sm w-full" />
-            </div>
-            <button type="button" className="bg-red-500 hover:bg-red-600 px-5 py-2 text-sm text-white uppercase">Apply</button>
+
             <div className="border-t mt-8">
               <div className="flex font-semibold justify-between py-6 text-sm uppercase">
                 <span>Total cost</span>
