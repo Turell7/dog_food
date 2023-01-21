@@ -7,6 +7,28 @@ const getProductsCreatedTimestamp = (timestamp) => {
 
 const getDiscountedPrice = (price, discount) => Math.round(price * ((100 - discount) / 100))
 
+const getPrice = (product) => {
+  if (product.discount) return getDiscountedPrice(product.price, product.discount)
+  return product.price
+}
+
+export const getOrderInfo = (prices, cart) => {
+  const fullInfo = prices.map((product) => ({
+    ...product, ...cart.find((item) => item.id === product.id),
+  })).filter((item) => item.isSelected)
+  let fullPrice = 0
+  const totalPrice = fullInfo.reduce((total, item) => {
+    fullPrice += item.price * item.count
+    return total + getPrice(item) * item.count
+  }, 0)
+  let totalSellectedItemsCount = 0
+  const totalItems = fullInfo.reduce((total, item) => {
+    totalSellectedItemsCount += item.count
+    return totalSellectedItemsCount
+  }, 0)
+  return { total: totalPrice, discount: fullPrice - totalPrice, totalItems }
+}
+
 const priceASC = (prodA, prodB) => {
   const priceA = prodA.discount
     ? getDiscountedPrice(prodA.price, prodA.discount) : prodA.price

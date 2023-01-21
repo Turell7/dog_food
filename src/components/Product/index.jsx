@@ -2,9 +2,11 @@ import { useDispatch } from 'react-redux'
 import { addItem } from '../../redux/slices/cartSlice/cartSlice'
 
 export function Product({
-  id, createdAt, name, img, price, tags, stock,
+  id, createdAt, name, img, price, tags, stock, discount,
 }) {
   const dispatch = useDispatch()
+
+  const discuontPrice = (price - ((price * discount) / 100))
 
   const onClickAdd = () => {
     const item = {
@@ -32,10 +34,21 @@ export function Product({
 
       <figure><img src={img} alt="product" /></figure>
       <div className="card-body">
-        <h3 className=" text-lg font-medium">
-          {price}
-          &#8381;
-        </h3>
+
+        {discount ? (
+          <h3 className=" text-lg font-medium text-red-500">
+            <span className="text-center w-1/5 font-semibold text-sm line-through text-slate-400">{price}</span>
+            {' '}
+            {discuontPrice}
+            &#8381;
+          </h3>
+        )
+          : (
+            <h3 className=" text-lg font-medium">
+              {price}
+              &#8381;
+            </h3>
+          )}
         <h4 className="opacity-50">
           {stock}
           шт

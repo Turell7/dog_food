@@ -10,8 +10,12 @@ const userSlice = createSlice({
       state.token = action.payload.token
       state.user = action.payload.data
     },
+    removeUser: (state) => {
+      state.token = ''
+      state.user = {}
+    },
   },
 })
 
-export const { setUser } = userSlice.actions
+export const { setUser, removeUser } = userSlice.actions
 export const userSliceReducer = userSlice.reducer

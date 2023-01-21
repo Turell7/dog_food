@@ -1,7 +1,6 @@
 /* eslint-disable no-underscore-dangle */
 import { useQuery } from '@tanstack/react-query'
 import { useSelector } from 'react-redux'
-// import { useAuth } from '../../../hooks/useAuth'
 import { api } from '../../../tools/Api'
 import { sortProducts } from '../../../tools/sortProducts'
 import { Loader } from '../../Loader'
@@ -12,20 +11,17 @@ export const PRODUCTS_QUERY_KEY = ['PRODUCTS_QUERY_KEY']
 
 export function Products() {
   const search = useSelector((store) => store.search.value)
-  const getProductsQueryKey = () => PRODUCTS_QUERY_KEY.concat(Object.values(search))
+  const { token } = useSelector((store) => store.user)
+  const getProductsQueryKey = () => PRODUCTS_QUERY_KEY.concat(Object.values(search), token)
 
   const sortValue = useSelector((store) => store.sort.value)
-  // const { token } = useAuth()
-  const { token } = useSelector((store) => store.user)
 
-  const getAllProducts = () => api.getAllProducts(token, search)
-  console.log({ token })
+  const getAllProducts = () => api.getAllProducts(search)
+
   const { data, isLoading } = useQuery({
     queryKey: getProductsQueryKey(search),
     queryFn: getAllProducts,
   })
-
-  console.log(data)
 
   if (isLoading) return <Loader />
   const products = search !== '' ? data : data.products
@@ -39,7 +35,6 @@ export function Products() {
     )
   }
 
-  // const { _id: id } = products
   return (
     <>
       {products.length && <SortProductsBar />}
@@ -54,6 +49,7 @@ export function Products() {
             tags={product.tags}
             createdAt={product.created_at}
             stock={product.stock}
+            discount={product.discount}
           />
         ))}
       </div>

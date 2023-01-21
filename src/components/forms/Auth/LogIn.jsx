@@ -6,7 +6,6 @@ import { useState } from 'react'
 import * as Yup from 'yup'
 import { useDispatch } from 'react-redux'
 import { api } from '../../../tools/Api'
-// import { useAuth } from '../../../hooks/useAuth'
 import { Alert } from '../../Alert'
 import { REQUIRED_ERROR_MESSAGE } from '../constants'
 import { setUser } from '../../../redux/slices/userSlice/userSlice'
@@ -15,8 +14,6 @@ export const LOGIN_QUERY_KEY = ['USER_QUERY_KEY']
 
 export function LogIn({ change, submitAdditionAction }) {
   const [message, setMessage] = useState('')
-
-  // const { saveUserDataAndToken } = useAuth()
 
   const dispatch = useDispatch()
 
@@ -28,7 +25,6 @@ export function LogIn({ change, submitAdditionAction }) {
     .then((res) => {
       if (!res.err) {
         dispatch(setUser(res))
-        // saveUserDataAndToken(res)
         submitAdditionAction()
       } else {
         errorHandler(res)

@@ -1,18 +1,23 @@
 import { Link } from 'react-router-dom'
 import { useCallback, useState } from 'react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import stylesNavBar from './styles.module.scss'
 import { ReactComponent as FavoriteIcon } from './img/ic-favorites.svg'
 import { ReactComponent as BasketIcon } from './img/ic-basket.svg'
 import { Modal } from '../Modal/Index'
-// import { useAuth } from '../../hooks/useAuth'
 import { Auth } from '../forms/Auth'
+import { removeUser } from '../../redux/slices/userSlice/userSlice'
+import { clearSort } from '../../redux/slices/sortProductsSlice/sortProductsSlice'
+import { clearSearch } from '../../redux/slices/searchProductsSlice/searchProductsSlice'
+import { clearItems } from '../../redux/slices/cartSlice/cartSlice'
 
 export function NavBar() {
   const { items, totalPrice } = useSelector((state) => state.cart)
 
   const [isModalOpen, setIsModalOpen] = useState(false)
-  // const { user, logOut } = useAuth()
+
+  const dispatch = useDispatch()
+
   const { user } = useSelector((store) => store.user)
   const openModal = () => {
     setIsModalOpen(true)
@@ -21,7 +26,13 @@ export function NavBar() {
     setIsModalOpen(false)
   }, [])
 
-  if (user) {
+  const logOut = () => {
+    dispatch(removeUser())
+    dispatch(clearSort())
+    dispatch(clearSearch())
+    dispatch(clearItems())
+  }
+  if (Object.entries(user).length) {
     return (
       <ul className={`${stylesNavBar.navbar} flex`}>
         <li className="p-15">
@@ -79,9 +90,9 @@ export function NavBar() {
               </Link>
             </li>
             <li>
-              {/* <button onClick={logOut} type="button" className="justify-between">
+              <button onClick={logOut} type="button" className="justify-between">
                 Log out
-              </button> */}
+              </button>
             </li>
 
           </ul>

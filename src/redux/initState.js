@@ -8,11 +8,11 @@ const initialState = {
     value: '',
   },
   cart: {
-    totalPrice: 0,
     items: [],
   },
   user: {
     token: '',
+    user: {},
   },
 }
 
@@ -21,14 +21,3 @@ export const getInitialState = () => {
 
   return stateLS ? JSON.parse(stateLS) : initialState
 }
-
-// const userInitialState = {
-//   token: null,
-//   user: null,
-// }
-
-// export const getUserInitialState = () => {
-//   const userStateLS = localStorage.getItem(USER_LS_KEY)
-
-//   return userStateLS ? JSON.parse(userStateLS) : userInitialState
-// }

@@ -15,24 +15,48 @@ const cartSlice = createSlice({
         state.items.push({
           ...action.payload,
           count: 1,
+          isSelected: false,
         })
       }
     },
-
-    plusItem(action, state) {
-      const findItem = state.items.find((obj) => obj.id === action.payload)
+    // plusItem можно выпилить, т.к. его роль так же выполняет addItem
+    plusItem(state, action) {
+      const findItem = state.items.find((item) => item.id === action.payload)
 
       if (findItem) {
         findItem.count += 1
       }
     },
 
-    minusItem(action, state) {
-      const findItem = state.items.find((obj) => obj.id === action.payload)
+    minusItem(state, action) {
+      const findItem = state.items.find((item) => item.id === action.payload)
 
       if (findItem) {
         findItem.count -= 1
       }
+    },
+
+    removeItem(state, action) {
+      state.items = state.items.filter((item) => item.id !== action.payload)
+    },
+    clearItems(state) {
+      state.items = []
+    },
+
+    toggleSelect(state, action) {
+      const findItem = state.items.find((item) => item.id === action.payload)
+      if (findItem) {
+        findItem.isSelected = !findItem.isSelected
+      }
+    },
+
+    setSelectAll(state, action) {
+      state.items.forEach((item) => { item.isSelected = action.payload })
+    },
+
+    removeSelectedItems(state) {
+      state.items = state.items.filter((item) => !item.isSelected)
+      return state
     },
 
     // addItem(state, action) {
@@ -40,17 +64,11 @@ const cartSlice = createSlice({
     //   // state.totalPrice = [...state.items, action.payload]
     //   // state.totalPrice = state.items((sum, obj) => obj.price + sum, 0)
     // },
-
-    removeItem(state, action) {
-      state.items = state.items.filter((obj) => obj.id !== action.payload)
-    },
-    clearItems(state) {
-      state.items = []
-    },
   },
 })
 
 export const {
-  addItem, clearItems, plusItem, minusItem, removeItem,
+  addItem, clearItems, plusItem, minusItem, removeItem, toggleSelect, setSelectAll,
+  removeSelectedItems,
 } = cartSlice.actions
 export const cartSliceReducer = cartSlice.reducer

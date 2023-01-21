@@ -1,3 +1,6 @@
+/* eslint-disable class-methods-use-this */
+import { REDUX_LS_KEY } from './storageKeys'
+
 class Api {
   constructor() {
     this.path = 'https://api.react-learning.ru'
@@ -9,25 +12,8 @@ class Api {
   //   this.token = newToken
   // }
 
-  async getAllProducts(token, search) {
-    try {
-      if (search === '') {
-        const res = await fetch(`${this.path}/products`, {
-          headers: {
-            authorization: `Bearer ${token}`,
-          },
-        })
-        return res.json()
-      }
-      const res = await fetch(`${this.path}/products/search?query=${search}`, {
-        headers: {
-          authorization: `Bearer ${token}`,
-        },
-      })
-      return res.json()
-    } catch (Error) {
-      throw new Error(Error)
-    }
+  getToken() {
+    return JSON.parse(localStorage.getItem(REDUX_LS_KEY)).user.token
   }
 
   async userSignUp(user) {
@@ -72,17 +58,47 @@ class Api {
     }
   }
 
-  async getInfoAboutMe(token) {
+  async getInfoAboutMe() {
     try {
       const res = await fetch(`${this.path}/v2/sm8/users/me`, {
         headers: {
-          authorization: `Bearer ${token}`,
+          authorization: `Bearer ${this.getToken()}`,
         },
       })
       return res.json()
     } catch (Error) {
       throw new Error(Error)
     }
+  }
+
+  async getAllProducts(search) {
+    try {
+      if (search === '') {
+        const res = await fetch(`${this.path}/products`, {
+          headers: {
+            authorization: `Bearer ${this.getToken()}`,
+          },
+        })
+        return res.json()
+      }
+      const res = await fetch(`${this.path}/products/search?query=${search}`, {
+        headers: {
+          authorization: `Bearer ${this.getToken()}`,
+        },
+      })
+      return res.json()
+    } catch (Error) {
+      throw new Error(Error)
+    }
+  }
+
+  async getProductsByIDs(ids) {
+    return Promise.all(ids.map((id) => fetch(`${this.path}/products/${id}`, {
+      headers: {
+        authorization: `Bearer ${this.getToken()}`,
+      },
+    })
+      .then((res) => res.json())))
   }
 }
 

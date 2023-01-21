@@ -1,23 +1,33 @@
 import { useQuery } from '@tanstack/react-query'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { Link, Navigate } from 'react-router-dom'
-// import { useAuth } from '../../../hooks/useAuth'
+import { clearItems } from '../../../redux/slices/cartSlice/cartSlice'
+import { clearSearch } from '../../../redux/slices/searchProductsSlice/searchProductsSlice'
+import { clearSort } from '../../../redux/slices/sortProductsSlice/sortProductsSlice'
+import { removeUser } from '../../../redux/slices/userSlice/userSlice'
 import { api } from '../../../tools/Api'
 
 export const USER_QUERY_KEY = ['USER_QUERY_KEY']
 
 export function Profile() {
-  // const { token, logOut } = useAuth()
-  const { token } = useSelector((store) => store.user)
-  const getInfoAboutMe = () => api.getInfoAboutMe(token)
+  const dispatch = useDispatch()
 
-  if (!token) return <Navigate to="/" />
+  const { token } = useSelector((store) => store.user)
+  const getInfoAboutMe = () => api.getInfoAboutMe()
 
   const { data } = useQuery({
     queryKey: USER_QUERY_KEY,
     queryFn: getInfoAboutMe,
   })
-  console.log({ data })
+
+  const logOut = () => {
+    dispatch(removeUser())
+    dispatch(clearSort())
+    dispatch(clearSearch())
+    dispatch(clearItems())
+  }
+
+  if (!token) return <Navigate to="/" />
 
   return (
     <div className="my-10">
@@ -91,9 +101,9 @@ export function Profile() {
             <p className="text-sm font-medium text-gray-800 leading-none">Paid orders</p>
           </div>
           <div className="flex justify-center">
-            {/* <button onClick={logOut} type="button" className="btn btn-wide">
+            <button onClick={logOut} type="button" className="btn btn-wide">
               Log out
-            </button> */}
+            </button>
           </div>
         </div>
       </div>
