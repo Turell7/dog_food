@@ -5,7 +5,7 @@ import { api } from '../../../tools/Api'
 import { sortProducts } from '../../../tools/sortProducts'
 import { Loader } from '../../Loader'
 import { Product } from '../../Product'
-import { SortProductsBar } from '../../SortProductsBar'
+import { SortProductsBar } from '../../layouts/SortProductsBar'
 
 export const PRODUCTS_QUERY_KEY = ['PRODUCTS_QUERY_KEY']
 

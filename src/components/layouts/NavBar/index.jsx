@@ -4,12 +4,12 @@ import { useDispatch, useSelector } from 'react-redux'
 import stylesNavBar from './styles.module.scss'
 import { ReactComponent as FavoriteIcon } from './img/ic-favorites.svg'
 import { ReactComponent as BasketIcon } from './img/ic-basket.svg'
-import { Modal } from '../Modal/Index'
-import { Auth } from '../forms/Auth'
-import { removeUser } from '../../redux/slices/userSlice/userSlice'
-import { clearSort } from '../../redux/slices/sortProductsSlice/sortProductsSlice'
-import { clearSearch } from '../../redux/slices/searchProductsSlice/searchProductsSlice'
-import { clearItems } from '../../redux/slices/cartSlice/cartSlice'
+import { Modal } from '../../Modal/Index'
+import { Auth } from '../../forms/Auth'
+import { removeUser } from '../../../redux/slices/userSlice/userSlice'
+import { clearSort } from '../../../redux/slices/sortProductsSlice/sortProductsSlice'
+import { clearSearch } from '../../../redux/slices/searchProductsSlice/searchProductsSlice'
+import { clearItems } from '../../../redux/slices/cartSlice/cartSlice'
 
 export function NavBar() {
   const { items, totalPrice } = useSelector((state) => state.cart)

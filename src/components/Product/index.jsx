@@ -1,4 +1,5 @@
 import { useDispatch } from 'react-redux'
+import { Link } from 'react-router-dom'
 import { addItem } from '../../redux/slices/cartSlice/cartSlice'
 
 export function Product({
@@ -62,7 +63,7 @@ export function Product({
           </div>
         </h2>
         <div className="card-actions justify-end">
-          <button type="button" className="btn btn-sm btn-outline btn-secondary">Detail</button>
+          <Link to={`/products/${id}`} className="btn btn-sm btn-outline btn-secondary">Detail</Link>
           <button onClick={onClickAdd} type="button" className="btn btn-sm btn-outline btn-secondary">Add to cart</button>
         </div>
       </div>

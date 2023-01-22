@@ -1,5 +1,5 @@
-import { Logo } from '../Logo'
-import { Social } from '../Social'
+import { Logo } from '../../Logo'
+import { Social } from '../../Social'
 import stylesFooter from './styles.module.scss'
 
 export function Footer() {

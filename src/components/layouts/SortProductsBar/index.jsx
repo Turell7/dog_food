@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux'
-import { setSort, sortValues } from '../../redux/slices/sortProductsSlice/sortProductsSlice'
+import { setSort, sortValues } from '../../../redux/slices/sortProductsSlice/sortProductsSlice'
 
 export function SortProductsBar() {
   const sortValue = useSelector((store) => store.sort.value)

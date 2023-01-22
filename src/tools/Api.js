@@ -92,13 +92,30 @@ class Api {
     }
   }
 
+  async getProductById(id) {
+    try {
+      const res = await fetch(`${this.path}/products/${id}`, {
+        headers: {
+          authorization: `Bearer ${this.getToken()}`,
+        },
+      })
+      return res.json()
+    } catch (Error) {
+      throw new Error(Error)
+    }
+  }
+
   async getProductsByIDs(ids) {
-    return Promise.all(ids.map((id) => fetch(`${this.path}/products/${id}`, {
-      headers: {
-        authorization: `Bearer ${this.getToken()}`,
-      },
-    })
-      .then((res) => res.json())))
+    try {
+      return Promise.all(ids.map((id) => fetch(`${this.path}/products/${id}`, {
+        headers: {
+          authorization: `Bearer ${this.getToken()}`,
+        },
+      })
+        .then((res) => res.json())))
+    } catch (Error) {
+      throw new Error(Error)
+    }
   }
 }
 

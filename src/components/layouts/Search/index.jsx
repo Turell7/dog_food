@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
-import { useDebounce } from '../../hooks/useDebounce'
-import { setSearch } from '../../redux/slices/searchProductsSlice/searchProductsSlice'
+import { useDebounce } from '../../../hooks/useDebounce'
+import { setSearch } from '../../../redux/slices/searchProductsSlice/searchProductsSlice'
 
 export function Search() {
   const [searchParams, setSearchParams] = useSearchParams()
