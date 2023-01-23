@@ -24,27 +24,36 @@ export function ProductDetail() {
         <div className="lg:w-4/5 mx-auto flex flex-wrap">
           <img alt="product" className="lg:w-1/2 w-full lg:h-auto h-64 object-cover object-center rounded" src={product.pictures} />
           <div className="lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0">
-            {/* <h2 className="text-sm title-font text-gray-500 tracking-widest">BRAND NAME</h2> */}
+            <div className="flex flex-wrap -m-4">
+              <div className="p-4">
+                <div className="h-full flex sm:flex-row flex-col items-center sm:justify-start justify-center text-center sm:text-left">
+                  <img className="w-12 mask mask-squircle" src={product.author.avatar} alt="avatar" />
+                  <div className="flex-grow sm:pl-8">
+                    <h2 className="title-font font-medium text-lg text-gray-900">
+                      Seller:
+                      {' '}
+                      {product.author.name}
+                    </h2>
+                    <span className="text-gray-500 mb-3">{product.author.about}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
             <h1 className="text-gray-900 text-3xl title-font font-medium mb-1">{product.name}</h1>
             <div className="flex mb-4">
-              <span className="flex items-center">
-                <svg fill="currentColor" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" className="w-4 h-4 text-yellow-500" viewBox="0 0 24 24">
-                  <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-                </svg>
-                <svg fill="currentColor" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" className="w-4 h-4 text-yellow-500" viewBox="0 0 24 24">
-                  <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-                </svg>
-                <svg fill="currentColor" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" className="w-4 h-4 text-yellow-500" viewBox="0 0 24 24">
-                  <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-                </svg>
-                <svg fill="currentColor" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" className="w-4 h-4 text-yellow-500" viewBox="0 0 24 24">
-                  <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-                </svg>
-                <svg fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" className="w-4 h-4 text-yellow-500" viewBox="0 0 24 24">
-                  <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-                </svg>
-                <span className="text-gray-600 ml-3">4 Reviews</span>
-              </span>
+              <div className="rating rating-md rating-half">
+                <input type="radio" name="rating-10" className="rating-hidden" />
+                <input type="radio" name="rating-10" className="bg-yellow-400 mask mask-star-2 mask-half-1" />
+                <input type="radio" name="rating-10" className="bg-yellow-400 mask mask-star-2 mask-half-2" />
+                <input type="radio" name="rating-10" className="bg-yellow-400 mask mask-star-2 mask-half-1" checked />
+                <input type="radio" name="rating-10" className="bg-yellow-400 mask mask-star-2 mask-half-2" />
+                <input type="radio" name="rating-10" className="bg-yellow-400 mask mask-star-2 mask-half-1" />
+                <input type="radio" name="rating-10" className="bg-yellow-400 mask mask-star-2 mask-half-2" />
+                <input type="radio" name="rating-10" className="bg-yellow-400 mask mask-star-2 mask-half-1" />
+                <input type="radio" name="rating-10" className="bg-yellow-400 mask mask-star-2 mask-half-2" />
+                <input type="radio" name="rating-10" className="bg-yellow-400 mask mask-star-2 mask-half-1" />
+                <input type="radio" name="rating-10" className="bg-yellow-400 mask mask-star-2 mask-half-2" />
+              </div>
               <span className="flex ml-3 pl-3 py-2 border-l-2 border-gray-200 space-x-2s">
                 <Link to="/" className="text-gray-500">
                   <svg fill="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" className="w-5 h-5" viewBox="0 0 24 24">
@@ -80,6 +89,10 @@ export function ProductDetail() {
                   <span className="title-font font-medium text-2xl text-red-500">
                     {discuontPrice}
                     &#8381;
+                  </span>
+                  <span className="bg-red-500 text-red-100 text-xs font-medium ml-5 px-2.5 py-0.5 rounded-full dark:bg-red-900 dark:text-red-400">
+                    {product.discount}
+                    &#37;
                   </span>
                 </h3>
               )

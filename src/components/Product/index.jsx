@@ -35,13 +35,16 @@ export function Product({
 
       <figure><img src={img} alt="product" /></figure>
       <div className="card-body">
-
         {discount ? (
           <h3 className=" text-lg font-medium text-red-500">
             <span className="text-center w-1/5 font-semibold text-sm line-through text-slate-400">{price}</span>
             {' '}
             {discuontPrice}
             &#8381;
+            <span className="bg-red-500 text-red-100 text-xs font-medium ml-5 px-2.5 py-0.5 rounded-full dark:bg-red-900 dark:text-red-400">
+              {discount}
+              &#37;
+            </span>
           </h3>
         )
           : (
