@@ -2,7 +2,7 @@
 import { useQuery } from '@tanstack/react-query'
 import { useSelector } from 'react-redux'
 import { api } from '../../../tools/Api'
-import { sortProducts } from '../../../tools/sortProducts'
+import { sortProducts } from '../../../tools/helpers'
 import { Loader } from '../../Loader'
 import { Product } from '../../Product'
 import { SortProductsBar } from '../../layouts/SortProductsBar'
@@ -50,6 +50,7 @@ export function Products() {
             createdAt={product.created_at}
             stock={product.stock}
             discount={product.discount}
+            product={product}
           />
         ))}
       </div>

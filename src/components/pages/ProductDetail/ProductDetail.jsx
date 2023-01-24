@@ -3,6 +3,7 @@ import { useQuery } from '@tanstack/react-query'
 import { useSelector } from 'react-redux'
 import { api } from '../../../tools/Api'
 import { Loader } from '../../Loader'
+import { ProductRate } from '../../ProductRate/ProductRate'
 
 const ITEM_DETAIL_QUERY_KEY = ['ITEM_DETAIL_QUERY_KEY']
 
@@ -20,6 +21,7 @@ export function ProductDetail() {
 
   return (
     <section className="text-gray-600 body-font overflow-hidden">
+      <div />
       <div className="container px-5 py-24 mx-auto">
         <div className="lg:w-4/5 mx-auto flex flex-wrap">
           <img alt="product" className="lg:w-1/2 w-full lg:h-auto h-64 object-cover object-center rounded" src={product.pictures} />
@@ -41,19 +43,7 @@ export function ProductDetail() {
             </div>
             <h1 className="text-gray-900 text-3xl title-font font-medium mb-1">{product.name}</h1>
             <div className="flex mb-4">
-              <div className="rating rating-md rating-half">
-                <input type="radio" name="rating-10" className="rating-hidden" />
-                <input type="radio" name="rating-10" className="bg-yellow-400 mask mask-star-2 mask-half-1" />
-                <input type="radio" name="rating-10" className="bg-yellow-400 mask mask-star-2 mask-half-2" />
-                <input type="radio" name="rating-10" className="bg-yellow-400 mask mask-star-2 mask-half-1" checked />
-                <input type="radio" name="rating-10" className="bg-yellow-400 mask mask-star-2 mask-half-2" />
-                <input type="radio" name="rating-10" className="bg-yellow-400 mask mask-star-2 mask-half-1" />
-                <input type="radio" name="rating-10" className="bg-yellow-400 mask mask-star-2 mask-half-2" />
-                <input type="radio" name="rating-10" className="bg-yellow-400 mask mask-star-2 mask-half-1" />
-                <input type="radio" name="rating-10" className="bg-yellow-400 mask mask-star-2 mask-half-2" />
-                <input type="radio" name="rating-10" className="bg-yellow-400 mask mask-star-2 mask-half-1" />
-                <input type="radio" name="rating-10" className="bg-yellow-400 mask mask-star-2 mask-half-2" />
-              </div>
+              <ProductRate product={product} />
               <span className="flex ml-3 pl-3 py-2 border-l-2 border-gray-200 space-x-2s">
                 <Link to="/" className="text-gray-500">
                   <svg fill="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" className="w-5 h-5" viewBox="0 0 24 24">

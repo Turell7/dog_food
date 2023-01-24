@@ -37,7 +37,7 @@ const priceASC = (prodA, prodB) => {
   return priceA - priceB
 }
 
-const getProductRate = (product) => {
+export const getProductRate = (product) => {
   const rating = product.reviews.length
     ? product.reviews.reduce((sum, rate) => sum + rate.rating, 0) / product.reviews.length : 0
   return rating.toFixed(1)

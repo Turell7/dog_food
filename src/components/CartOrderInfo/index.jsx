@@ -1,5 +1,5 @@
 import { useSelector } from 'react-redux'
-import { getOrderInfo } from '../../tools/sortProducts'
+import { getOrderInfo } from '../../tools/helpers'
 
 export function CartOrderInfo({ productPrices }) {
   const { items } = useSelector((state) => state.cart)

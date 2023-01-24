@@ -1,9 +1,10 @@
 import { useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { addItem } from '../../redux/slices/cartSlice/cartSlice'
+import { ProductRate } from '../ProductRate/ProductRate'
 
 export function Product({
-  id, createdAt, name, img, price, tags, stock, discount,
+  id, createdAt, name, img, price, tags, stock, discount, product,
 }) {
   const dispatch = useDispatch()
 
@@ -35,6 +36,8 @@ export function Product({
 
       <figure><img src={img} alt="product" /></figure>
       <div className="card-body">
+
+        <ProductRate product={product} />
         {discount ? (
           <h3 className=" text-lg font-medium text-red-500">
             <span className="text-center w-1/5 font-semibold text-sm line-through text-slate-400">{price}</span>
