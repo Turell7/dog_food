@@ -1,7 +1,7 @@
 import { createBrowserRouter } from 'react-router-dom'
 import App from '../App'
 import { Cart } from '../components/pages/Cart'
-import { ProductDetail } from '../components/pages/ProductDetail/ProductDetail'
+import { ProductDetail } from '../components/pages/ProductDetail'
 import { Products } from '../components/pages/Products'
 import { Profile } from '../components/pages/Profile'
 

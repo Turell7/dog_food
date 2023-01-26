@@ -7,7 +7,7 @@ import { CatrEmpty } from '../../CartEmpty/CartEmpty'
 import { CartHeader } from '../../CartHeader'
 import { CartItem } from '../../CartItem'
 import { CartOrderInfo } from '../../CartOrderInfo'
-import { Loader } from '../../Loader'
+import { Loader } from '../../UI/Loader'
 
 const ITEMS_QUERY_KEY = ['ITEMS_QUERY_KEY']
 

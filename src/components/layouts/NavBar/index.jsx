@@ -2,8 +2,8 @@ import { Link } from 'react-router-dom'
 import { useCallback, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import stylesNavBar from './styles.module.scss'
-import { ReactComponent as FavoriteIcon } from './img/ic-favorites.svg'
-import { ReactComponent as BasketIcon } from './img/ic-basket.svg'
+import { ReactComponent as FavoriteIcon } from '../../UI/icons/ic-favorites.svg'
+import { ReactComponent as BasketIcon } from '../../UI/icons/ic-basket.svg'
 import { Modal } from '../../Modal/Index'
 import { Auth } from '../../forms/Auth'
 import { removeUser } from '../../../redux/slices/userSlice/userSlice'
@@ -12,7 +12,7 @@ import { clearSearch } from '../../../redux/slices/searchProductsSlice/searchPro
 import { clearItems } from '../../../redux/slices/cartSlice/cartSlice'
 
 export function NavBar() {
-  const { items, totalPrice } = useSelector((state) => state.cart)
+  const { items, totalPrice } = useSelector((store) => store.cart)
 
   const [isModalOpen, setIsModalOpen] = useState(false)
 

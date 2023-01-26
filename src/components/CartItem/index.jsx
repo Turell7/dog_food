@@ -2,6 +2,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import {
   addItem, minusItem, removeItem, toggleSelect,
 } from '../../redux/slices/cartSlice/cartSlice'
+import { getDiscountedPrice } from '../../tools/helpers'
 
 export function CartItem({
   id, name, img, price, stock, discount,
@@ -10,7 +11,7 @@ export function CartItem({
 
   const { items } = useSelector((store) => store.cart)
   const cartItem = items.find((item) => item.id === id)
-  const discuontPrice = (price - ((price * discount) / 100))
+  const discuontPrice = getDiscountedPrice(price, discount)
   const sumItemPrice = price * cartItem.count
   const sumDiscountItemPrice = discuontPrice * cartItem.count
 
@@ -49,14 +50,14 @@ export function CartItem({
         </div>
       </div>
       <div className="flex justify-center w-1/5">
-        <button onClick={onClickMinus} className="btn btn-outline btn-secondary btn-xs border-white" type="button" disabled={cartItem.count === 1}>
+        <button onClick={onClickMinus} className="btn btn-circle bg-gray-200 btn-secondary btn-xs border-0 p-0 inline-flex items-center justify-center text-gray-500" type="button" disabled={cartItem.count === 1}>
           <svg className="fill-current text-gray-600 w-3 " viewBox="0 0 448 512">
             <path d="M416 208H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h384c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z" />
           </svg>
         </button>
 
         <input className="mx-2 border text-center w-8" type="text" value={cartItem.count} readOnly="readonly" />
-        <button onClick={onClickPlus} className="btn btn-outline btn-secondary btn-xs border-white" type="button" disabled={cartItem.count === stock}>
+        <button onClick={onClickPlus} className="btn btn-circle bg-gray-200 btn-secondary btn-xs border-0 p-0 inline-flex items-center justify-center text-gray-500" type="button" disabled={cartItem.count === stock}>
           <svg className="fill-current text-gray-600 w-3 " viewBox="0 0 448 512">
             <path d="M416 208H272V64c0-17.67-14.33-32-32-32h-32c-17.67 0-32 14.33-32 32v144H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h144v144c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V304h144c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z" />
           </svg>
@@ -100,7 +101,7 @@ export function CartItem({
         </span>
       )}
       <div className="tooltip" data-tip="Delete item">
-        <button onClick={() => dispatch(removeItem(id))} className="btn btn-circle btn-outline btn-xs mx-8" type="button">
+        <button onClick={() => dispatch(removeItem(id))} className="btn btn-circle btn-xs bg-gray-200 p-0 border-0 inline-flex items-center justify-center text-gray-500 ml-4" type="button">
           <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="-2 -2 28 28" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" /></svg>
         </button>
       </div>

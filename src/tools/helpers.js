@@ -5,7 +5,7 @@ const getProductsCreatedTimestamp = (timestamp) => {
   return date.valueOf()
 }
 
-const getDiscountedPrice = (price, discount) => Math.round(price * ((100 - discount) / 100))
+export const getDiscountedPrice = (price, discount) => Math.round(price * ((100 - discount) / 100))
 
 const getPrice = (product) => {
   if (product.discount) return getDiscountedPrice(product.price, product.discount)

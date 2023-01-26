@@ -3,7 +3,7 @@ import { useQuery } from '@tanstack/react-query'
 import { useSelector } from 'react-redux'
 import { api } from '../../../tools/Api'
 import { sortProducts } from '../../../tools/helpers'
-import { Loader } from '../../Loader'
+import { Loader } from '../../UI/Loader'
 import { Product } from '../../Product'
 import { SortProductsBar } from '../../layouts/SortProductsBar'
 
