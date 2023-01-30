@@ -12,7 +12,8 @@ import { clearSearch } from '../../../redux/slices/searchProductsSlice/searchPro
 import { clearItems } from '../../../redux/slices/cartSlice/cartSlice'
 
 export function NavBar() {
-  const { items, totalPrice } = useSelector((store) => store.cart)
+  const { items } = useSelector((store) => store.cart)
+  const productFavoriteIds = useSelector((store) => store.favorite)
 
   const [isModalOpen, setIsModalOpen] = useState(false)
 
@@ -35,23 +36,25 @@ export function NavBar() {
   if (Object.entries(user).length) {
     return (
       <ul className={`${stylesNavBar.navbar} flex`}>
-        <li className="p-15">
-          <Link to="/" className="btn btn-ghost btn-circle">
+        <li className={`p-15 ${!productFavoriteIds.length && 'tooltip tooltip-bottom'}`} data-tip="The favorites list is empty">
+          {/* <div className="tooltip" data-tip="Select All"> */}
+          <Link to="/favorites" className={`btn btn-ghost btn-circle ${!productFavoriteIds.length && 'pointer-events-none opacity-40'}`}>
             <div className="indicator">
               <FavoriteIcon />
-              <span className="badge badge-sm indicator-item">5</span>
+              {productFavoriteIds.length > 0 && <span className="badge badge-sm indicator-item">{productFavoriteIds.length}</span>}
             </div>
           </Link>
         </li>
 
-        <li className="dropdown dropdown-end">
-          <button className="btn btn-ghost btn-circle" type="button">
+        <li className={`${!items.length && 'tooltip tooltip-bottom'}`} data-tip="The cart list is empty">
+          <Link to="/cart" className={`btn btn-ghost btn-circle ${!items.length && 'pointer-events-none opacity-40'}`}>
             <div className="indicator">
               <BasketIcon />
-              <span className="badge badge-sm indicator-item">{items.length}</span>
+              {items.length > 0 && <span className="badge badge-sm indicator-item">{items.length}</span>}
+              {/* <span className="badge badge-sm indicator-item">{items.length}</span> */}
             </div>
-          </button>
-          <div className="mt-3 card card-compact dropdown-content w-52 bg-base-100 shadow">
+          </Link>
+          {/* <div className="mt-3 card card-compact dropdown-content w-52 bg-base-100 shadow">
             <div className="card-body">
               <span className="font-bold text-lg">
                 {items.length}
@@ -61,17 +64,13 @@ export function NavBar() {
               <span className="text-info">
                 Subtotal:
                 {' '}
-                {totalPrice}
                 ₽
               </span>
-              {/* <div className="card-actions">
-                <button type="button" className="btn btn-primary btn-block">View cart</button>
-              </div> */}
               <Link to="/cart" className="btn btn-primary btn-block">
                 View cart
               </Link>
             </div>
-          </div>
+          </div> */}
         </li>
 
         <li className="dropdown dropdown-end">

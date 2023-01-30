@@ -5,11 +5,11 @@ class Api {
   constructor() {
     this.path = 'https://api.react-learning.ru'
     this.group = 'sm8'
-    this.tokenHeaders = {
-      headers: {
-        authorization: `Bearer ${this.getToken()}`,
-      },
-    }
+    // this.tokenHeaders = {
+    //   headers: {
+    //     authorization: `Bearer ${this.getToken()}`,
+    //   },
+    // }
     // this.token = ''
   }
 
@@ -65,7 +65,11 @@ class Api {
 
   async getInfoAboutMe() {
     try {
-      const res = await fetch(`${this.path}/v2/sm8/users/me`, this.tokenHeaders)
+      const res = await fetch(`${this.path}/v2/sm8/users/me`, {
+        headers: {
+          authorization: `Bearer ${this.getToken()}`,
+        },
+      })
       return res.json()
     } catch (Error) {
       throw new Error(Error)
@@ -75,10 +79,18 @@ class Api {
   async getAllProducts(search) {
     try {
       if (search === '') {
-        const res = await fetch(`${this.path}/products`, this.tokenHeaders)
+        const res = await fetch(`${this.path}/products`, {
+          headers: {
+            authorization: `Bearer ${this.getToken()}`,
+          },
+        })
         return res.json()
       }
-      const res = await fetch(`${this.path}/products/search?query=${search}`, this.tokenHeaders)
+      const res = await fetch(`${this.path}/products/search?query=${search}`, {
+        headers: {
+          authorization: `Bearer ${this.getToken()}`,
+        },
+      })
       return res.json()
     } catch (Error) {
       throw new Error(Error)
@@ -87,7 +99,11 @@ class Api {
 
   async getProductById(id) {
     try {
-      const res = await fetch(`${this.path}/products/${id}`, this.tokenHeaders)
+      const res = await fetch(`${this.path}/products/${id}`, {
+        headers: {
+          authorization: `Bearer ${this.getToken()}`,
+        },
+      })
       return res.json()
     } catch (Error) {
       throw new Error(Error)
@@ -96,7 +112,11 @@ class Api {
 
   async getProductsByIDs(ids) {
     try {
-      return Promise.all(ids.map((id) => fetch(`${this.path}/products/${id}`, this.tokenHeaders)
+      return Promise.all(ids.map((id) => fetch(`${this.path}/products/${id}`, {
+        headers: {
+          authorization: `Bearer ${this.getToken()}`,
+        },
+      })
         .then((res) => res.json())))
     } catch (Error) {
       throw new Error(Error)
@@ -105,7 +125,11 @@ class Api {
 
   async getProductReviews(id) {
     try {
-      const res = await fetch(`${this.path}/products/review/${id}`, this.tokenHeaders)
+      const res = await fetch(`${this.path}/products/review/${id}`, {
+        headers: {
+          authorization: `Bearer ${this.getToken()}`,
+        },
+      })
       return res.json()
     } catch (Error) {
       throw new Error(Error)

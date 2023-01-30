@@ -23,10 +23,6 @@ export function Products() {
     queryFn: getAllProducts,
   })
 
-  if (isLoading) return <Loader />
-  const products = search !== '' ? data : data.products
-  sortProducts(products, sortValue)
-
   if (!token) {
     return (
       <div>
@@ -34,6 +30,10 @@ export function Products() {
       </div>
     )
   }
+
+  if (isLoading) return <Loader />
+  const products = search !== '' ? data : data.products
+  sortProducts(products, sortValue)
 
   return (
     <>

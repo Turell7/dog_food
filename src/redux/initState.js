@@ -14,6 +14,7 @@ const initialState = {
     token: '',
     user: {},
   },
+  favorite: [],
 }
 
 export const getInitialState = () => {

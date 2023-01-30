@@ -23,15 +23,6 @@ export function Search() {
     setsearchState(debounceValue)
   }, [debounceValue])
 
-  // const dispatch = useDispatch()
-
-  // const setsearchState = (value) => dispatch(setSearch(value))
-
-  // const testDebounce = useCallback(debounce((event) => {
-  //   setsearchState(event.target.value)
-  //   console.log('kjkj')
-  // }, 350), [])
-
   return (
     <div className="form-control">
       <input
