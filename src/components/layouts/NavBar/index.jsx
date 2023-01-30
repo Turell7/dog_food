@@ -1,15 +1,12 @@
 import { Link } from 'react-router-dom'
 import { useCallback, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import stylesNavBar from './styles.module.scss'
 import { ReactComponent as FavoriteIcon } from '../../UI/icons/ic-favorites.svg'
 import { ReactComponent as BasketIcon } from '../../UI/icons/ic-basket.svg'
 import { Modal } from '../../Modal/Index'
 import { Auth } from '../../forms/Auth'
-import { removeUser } from '../../../redux/slices/userSlice/userSlice'
-import { clearSort } from '../../../redux/slices/sortProductsSlice/sortProductsSlice'
-import { clearSearch } from '../../../redux/slices/searchProductsSlice/searchProductsSlice'
-import { clearItems } from '../../../redux/slices/cartSlice/cartSlice'
+import { useLogOut } from '../../../hooks/useLogOut'
 
 export function NavBar() {
   const { items } = useSelector((store) => store.cart)
@@ -17,7 +14,7 @@ export function NavBar() {
 
   const [isModalOpen, setIsModalOpen] = useState(false)
 
-  const dispatch = useDispatch()
+  const { logOut } = useLogOut()
 
   const { user } = useSelector((store) => store.user)
   const openModal = () => {
@@ -27,17 +24,17 @@ export function NavBar() {
     setIsModalOpen(false)
   }, [])
 
-  const logOut = () => {
-    dispatch(removeUser())
-    dispatch(clearSort())
-    dispatch(clearSearch())
-    dispatch(clearItems())
-  }
   if (Object.entries(user).length) {
     return (
       <ul className={`${stylesNavBar.navbar} flex`}>
-        <li className={`p-15 ${!productFavoriteIds.length && 'tooltip tooltip-bottom'}`} data-tip="The favorites list is empty">
-          {/* <div className="tooltip" data-tip="Select All"> */}
+        <li className="p-15 tooltip tooltip-bottom" data-tip="Created a new product">
+          <Link to="/create_product" className="btn btn-ghost btn-circle">
+            <svg className="fill-current text-gray-600 w-3 " viewBox="0 0 448 512">
+              <path d="M416 208H272V64c0-17.67-14.33-32-32-32h-32c-17.67 0-32 14.33-32 32v144H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h144v144c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V304h144c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z" />
+            </svg>
+          </Link>
+        </li>
+        <li className={`${!productFavoriteIds.length && 'tooltip tooltip-bottom'}`} data-tip="The favorites list is empty">
           <Link to="/favorites" className={`btn btn-ghost btn-circle ${!productFavoriteIds.length && 'pointer-events-none opacity-40'}`}>
             <div className="indicator">
               <FavoriteIcon />
@@ -45,7 +42,6 @@ export function NavBar() {
             </div>
           </Link>
         </li>
-
         <li className={`${!items.length && 'tooltip tooltip-bottom'}`} data-tip="The cart list is empty">
           <Link to="/cart" className={`btn btn-ghost btn-circle ${!items.length && 'pointer-events-none opacity-40'}`}>
             <div className="indicator">

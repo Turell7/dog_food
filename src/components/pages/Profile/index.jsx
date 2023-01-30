@@ -1,31 +1,20 @@
 import { useQuery } from '@tanstack/react-query'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { Link, Navigate } from 'react-router-dom'
-import { clearItems } from '../../../redux/slices/cartSlice/cartSlice'
-import { clearSearch } from '../../../redux/slices/searchProductsSlice/searchProductsSlice'
-import { clearSort } from '../../../redux/slices/sortProductsSlice/sortProductsSlice'
-import { removeUser } from '../../../redux/slices/userSlice/userSlice'
+import { useLogOut } from '../../../hooks/useLogOut'
 import { api } from '../../../tools/Api'
 
 export const USER_QUERY_KEY = ['USER_QUERY_KEY']
 
 export function Profile() {
-  const dispatch = useDispatch()
-
   const { token } = useSelector((store) => store.user)
+  const { logOut } = useLogOut()
   const getInfoAboutMe = () => api.getInfoAboutMe()
 
   const { data } = useQuery({
     queryKey: USER_QUERY_KEY,
     queryFn: getInfoAboutMe,
   })
-
-  const logOut = () => {
-    dispatch(removeUser())
-    dispatch(clearSort())
-    dispatch(clearSearch())
-    dispatch(clearItems())
-  }
 
   if (!token) return <Navigate to="/" />
 
@@ -92,7 +81,6 @@ export function Profile() {
             </div>
           </div>
         </div>
-
         <div className="">
           <div className="px-4 py-2 pb-4 hover:bg-gray-100 flex">
             <p className="text-sm font-medium text-gray-800 leading-none">Products in the basket</p>
@@ -108,7 +96,6 @@ export function Profile() {
         </div>
       </div>
       )}
-
     </div>
   )
 }

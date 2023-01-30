@@ -194,6 +194,27 @@ class Api {
       throw new Error(Error)
     }
   }
+
+  async createProduct(productData) {
+    try {
+      const res = await fetch(`${this.path}/products`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          authorization: `Bearer ${this.getToken()}`,
+        },
+        body: JSON.stringify(productData),
+      })
+      if (res.status !== 200) {
+        const answer = await res.json()
+        console.log(answer.err.statusCode, answer.message)
+        return answer
+      }
+      return res.json()
+    } catch (Error) {
+      throw new Error(Error)
+    }
+  }
 }
 
 const api = new Api()

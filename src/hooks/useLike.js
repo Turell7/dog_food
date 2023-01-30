@@ -5,7 +5,6 @@ import { PRODUCTS_QUERY_KEY } from '../components/pages/Products'
 import { api } from '../tools/Api'
 
 export const useLike = (product) => {
-  console.log({ product })
   const userId = useSelector((store) => store.user.user._id)
   const isLiked = product?.likes.findIndex((like) => like === userId) !== -1
   const queryClient = useQueryClient()
