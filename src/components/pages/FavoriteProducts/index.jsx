@@ -1,7 +1,6 @@
 /* eslint-disable no-underscore-dangle */
 import { useQuery } from '@tanstack/react-query'
 import { useSelector } from 'react-redux'
-// import { Navigate } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom'
 import { api } from '../../../tools/Api'
 import { Product } from '../../Product'

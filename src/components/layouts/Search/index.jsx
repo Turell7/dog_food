@@ -6,13 +6,9 @@ import { setSearch } from '../../../redux/slices/searchProductsSlice/searchProdu
 
 export function Search() {
   const [searchParams, setSearchParams] = useSearchParams()
-
   const [input, setInput] = useState(() => searchParams.get('q') ?? '')
-
   const dispatch = useDispatch()
-
   const setsearchState = (value) => dispatch(setSearch(value))
-
   const debounceValue = useDebounce(input, 350)
 
   useEffect(() => {

@@ -13,9 +13,7 @@ export function Products() {
   const search = useSelector((store) => store.search.value)
   const { token } = useSelector((store) => store.user)
   const getProductsQueryKey = () => PRODUCTS_QUERY_KEY.concat(Object.values(search), token)
-
   const sortValue = useSelector((store) => store.sort.value)
-
   const getAllProducts = () => api.getAllProducts(search)
 
   const { data, isLoading } = useQuery({
