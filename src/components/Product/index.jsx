@@ -97,7 +97,7 @@ export function Product({
           <Link to={`/products/${id}`} className="btn btn-sm btn-outline btn-secondary">Detail</Link>
           <button onClick={onClickAdd} type="button" className="btn btn-sm btn-outline btn-secondary">
             To cart
-            {cartItem && <span className="badge badge-md">{cartItem.count}</span>}
+            {cartItem && <span className="badge badge-md mx-0.5">{cartItem.count}</span>}
           </button>
         </div>
       </div>

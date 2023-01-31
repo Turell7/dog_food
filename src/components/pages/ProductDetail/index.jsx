@@ -18,6 +18,8 @@ export function ProductDetail() {
   const { token, user } = useSelector((store) => store.user)
   const dispatch = useDispatch()
   const navigate = useNavigate()
+  const { items } = useSelector((store) => store.cart)
+  const cartItem = items.find((item) => item.id === id)
 
   const { data: product, isLoading } = useQuery({
     queryKey: ITEM_DETAIL_QUERY_KEY.concat(id),
@@ -58,9 +60,6 @@ export function ProductDetail() {
   const discuontPrice = getDiscountedPrice(product.price, product.discount)
 
   return (
-  // <section className="text-gray-600 body-font overflow-hidden">
-  // <div />
-  // <div className="container px-5 py-24 mx-auto">
     <div className="grid grid-cols-2">
       <img alt="product" className="lg:w-8/12 w-full lg:h-auto h-64 object-cover object-center rounded" src={product.pictures} />
       <div className="lg:w-11/12 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0">
@@ -171,13 +170,14 @@ export function ProductDetail() {
                 </span>
               </h3>
             )}
-          <button onClick={onClickAdd} type="button" className="flex ml-auto btn btn-sm btn-outline btn-secondary">Add to cart</button>
+          <button onClick={onClickAdd} type="button" className="flex ml-auto btn btn-sm btn-outline btn-secondary">
+            Add to cart
+            {cartItem && <span className="badge badge-md mx-0.5">{cartItem.count}</span>}
+          </button>
         </div>
         <div className="flex mt-6 items-center pb-5 border-b-2 border-gray-100 mb-5" />
         <Reviews />
       </div>
     </div>
-  // </div>
-  // </section>
   )
 }
