@@ -45,26 +45,8 @@ export function NavBar() {
             <div className="indicator">
               <BasketIcon />
               {items.length > 0 && <span className="badge badge-sm indicator-item">{items.length}</span>}
-              {/* <span className="badge badge-sm indicator-item">{items.length}</span> */}
             </div>
           </Link>
-          {/* <div className="mt-3 card card-compact dropdown-content w-52 bg-base-100 shadow">
-            <div className="card-body">
-              <span className="font-bold text-lg">
-                {items.length}
-                {' '}
-                Items
-              </span>
-              <span className="text-info">
-                Subtotal:
-                {' '}
-                ₽
-              </span>
-              <Link to="/cart" className="btn btn-primary btn-block">
-                View cart
-              </Link>
-            </div>
-          </div> */}
         </li>
 
         <li className="dropdown dropdown-end">

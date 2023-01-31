@@ -35,9 +35,7 @@ export function CartItem({
         <input checked={cartItem.isSelected} onChange={selectHendler} type="checkbox" className="checkbox checkbox-secondary mx-4" />
       </div>
       <div className="flex w-2/5">
-        {/* <!-- product --> */}
         <div className="w-20">
-
           <figure><img src={img} alt="product" /></figure>
         </div>
         <div className="flex flex-col justify-between ml-4 flex-grow">
@@ -90,7 +88,6 @@ export function CartItem({
       </div>
       {discount ? (
         <span className="text-center w-1/5 font-semibold text-base">
-          {/* {sumItemPrice} */}
           {sumDiscountItemPrice}
           &#8381;
         </span>
