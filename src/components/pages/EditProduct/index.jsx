@@ -72,7 +72,7 @@ export function EditProduct() {
         mutate(values)
       }}
     >
-      <Form name="addProduct" className="card-body grid grid-cols-2">
+      <Form className="card-body grid grid-cols-2">
         {/* { message && <Alert message={message} />} */}
         <div>
           <div className="form-control">

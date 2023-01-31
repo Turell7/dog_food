@@ -76,6 +76,38 @@ class Api {
     }
   }
 
+  async editUserData(userData) {
+    try {
+      const res = await fetch(`${this.path}/v2/sm8/users/me`, {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+          authorization: `Bearer ${this.getToken()}`,
+        },
+        body: JSON.stringify(userData),
+      })
+      return res.json()
+    } catch (Error) {
+      throw new Error(Error)
+    }
+  }
+
+  async editUserAvatar(userAvatar) {
+    try {
+      const res = await fetch(`${this.path}/v2/sm8/users/me/avatar`, {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+          authorization: `Bearer ${this.getToken()}`,
+        },
+        body: JSON.stringify(userAvatar),
+      })
+      return res.json()
+    } catch (Error) {
+      throw new Error(Error)
+    }
+  }
+
   async getAllProducts(search) {
     try {
       if (search === '') {
