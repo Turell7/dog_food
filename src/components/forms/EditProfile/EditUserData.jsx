@@ -19,16 +19,11 @@ export function EditUserData({ change, submitAdditionAction, user }) {
   return (
     <Formik
       initialValues={{
-      //   avatar: user.avatar,
         name: user.name,
         about: user.about,
       }}
       validationSchema={Yup.object(
         {
-          // avatar: Yup.string().url()
-          //   .min(2, 'More than 2 symbols')
-          //   .max(200, 'Max 200 symbols')
-          //   .required('Please set image url'),
           name: Yup.string()
             .min(2, 'More than 2 symbols')
             .max(40, 'Max 40 symbols')
@@ -45,18 +40,6 @@ export function EditUserData({ change, submitAdditionAction, user }) {
     >
       <Form className="card-body">
         {/* { message && <Alert message={message} />} */}
-        {/* <div className="form-control">
-          <div className="avatar">
-            <div className="w-24 mask mask-squircle">
-              <img src={user.avatar} alt="old avatar" />
-            </div>
-          </div>
-          <div className="label">
-            <span className="label-text">Avatar</span>
-          </div>
-          <Field name="avatar" type="url" placeholder="https://example.com/pictures.png" className="input input-bordered" />
-          <ErrorMessage component="span" name="avatar" className="error" />
-        </div> */}
         <div className="form-control">
           <div className="label">
             <span className="label-text">Name</span>
@@ -77,7 +60,7 @@ export function EditUserData({ change, submitAdditionAction, user }) {
           </div>
         </div>
         <div className="form-control mt-6">
-          <button type="submit" className="btn btn-secondary">LogIn</button>
+          <button type="submit" className="btn btn-secondary">Updade</button>
         </div>
       </Form>
     </Formik>

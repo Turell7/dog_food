@@ -20,8 +20,6 @@ export function EditUserAvatar({ change, submitAdditionAction, user }) {
     <Formik
       initialValues={{
         avatar: user.avatar,
-        // name: user.name,
-        // about: user.about,
       }}
       validationSchema={Yup.object(
         {
@@ -29,14 +27,6 @@ export function EditUserAvatar({ change, submitAdditionAction, user }) {
             .min(2, 'More than 2 symbols')
             .max(200, 'Max 200 symbols')
             .required('Please set image url'),
-        //   name: Yup.string()
-        //     .min(2, 'More than 2 symbols')
-        //     .max(40, 'Max 40 symbols')
-        //     .required('Please set name'),
-        //   about: Yup.string()
-        //     .min(10, 'More than 10 symbols')
-        //     .max(200, 'Max 200 symbols')
-        //     .required('Please set status'),
         },
       )}
       onSubmit={(values) => {
