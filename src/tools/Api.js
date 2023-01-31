@@ -5,13 +5,13 @@ class Api {
   constructor() {
     this.path = 'https://api.react-learning.ru'
     this.group = 'sm8'
-    // this.tokenHeaders = {
-    //   headers: {
-    //     authorization: `Bearer ${this.getToken()}`,
-    //   },
-    // }
-    // this.token = ''
   }
+  // this.tokenHeaders = {
+  //   headers: {
+  //     authorization: `Bearer ${this.getToken()}`,
+  //   },
+  // }
+  // this.token = ''
 
   // setNewToken(newToken) {
   //   this.token = newToken
@@ -205,11 +205,6 @@ class Api {
         },
         body: JSON.stringify(productData),
       })
-      if (res.status !== 200) {
-        const answer = await res.json()
-        console.log(answer.err.statusCode, answer.message)
-        return answer
-      }
       return res.json()
     } catch (Error) {
       throw new Error(Error)

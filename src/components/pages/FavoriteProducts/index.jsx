@@ -19,7 +19,6 @@ export function FavoriteProducts() {
     queryFn: () => api.getProductsByIDs(productIds),
   })
 
-  console.log(productIds.length)
   if (isLoading) return <Loader />
   return (
     <div className="grid gap-4 grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
