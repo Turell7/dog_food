@@ -210,6 +210,41 @@ class Api {
       throw new Error(Error)
     }
   }
+
+  async editProduct(productData, id) {
+    try {
+      const res = await fetch(`${this.path}/products/${id}`, {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+          authorization: `Bearer ${this.getToken()}`,
+        },
+        body: JSON.stringify(productData),
+      })
+      return res.json()
+    } catch (Error) {
+      throw new Error(Error)
+    }
+  }
+
+  async deleteProduct(id) {
+    try {
+      const res = await fetch(`${this.path}/products/${id}`, {
+        method: 'DELETE',
+        headers: {
+          authorization: `Bearer ${this.getToken()}`,
+        },
+      })
+      if (res.status !== 200) {
+        const answer = await res.json()
+        console.log(answer.err.statusCode, answer.message)
+        return answer
+      }
+      return res.json()
+    } catch (Error) {
+      throw new Error(Error)
+    }
+  }
 }
 
 const api = new Api()

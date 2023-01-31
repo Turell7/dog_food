@@ -1,18 +1,22 @@
 /* eslint-disable no-underscore-dangle */
-import { useMutation } from '@tanstack/react-query'
+import { useMutation, useQuery } from '@tanstack/react-query'
 import {
   ErrorMessage, Field, Form, Formik,
 } from 'formik'
 import { useSelector } from 'react-redux'
-import { Navigate, useNavigate } from 'react-router-dom'
-// import { useState } from 'react'
+import { Navigate, useNavigate, useParams } from 'react-router-dom'
 import * as Yup from 'yup'
 import { api } from '../../../tools/Api'
+import { ITEM_DETAIL_QUERY_KEY } from '../../../tools/queryKey'
 
-export function CreateProduct() {
+export function EditProduct() {
   const token = useSelector((store) => store.user.token)
-  //   const noPictures = 'https://banner2.cleanpng.com/20180615/yvr/kisspng-computer-icons-landscape-via-ghilini-5b2451fe9d0e69.0779585515291069426433.jpg'
-  //   const [pictures, setPictures] = useState('')
+  const { id } = useParams()
+
+  const { data: product } = useQuery({
+    queryKey: ITEM_DETAIL_QUERY_KEY.concat(id),
+    queryFn: () => api.getProductById(id),
+  })
 
   const navigate = useNavigate()
 
@@ -21,27 +25,22 @@ export function CreateProduct() {
   }
 
   const { mutate } = useMutation({
-    mutationFn: (productData) => api.createProduct(productData),
+    mutationFn: (productData) => api.editProduct(productData, id),
     onSuccess: successHandler,
   })
 
-  // const test = document.forms.addProduct
-  // console.log({ test })
-
-  // const test2 = document.getElementsByTagName('input')[0]
-  // console.log({ test2 })
-
   if (!token) return <Navigate to="/" />
+
   return (
     <Formik
       initialValues={{
-        name: '',
-        price: '',
-        discount: '',
-        stock: '',
-        wight: '',
-        pictures: '',
-        description: '',
+        name: product.name,
+        price: product.price,
+        discount: product.discount,
+        stock: product.stock,
+        wight: product.wight,
+        pictures: product.pictures,
+        description: product.description,
       }}
       validationSchema={Yup.object(
         {
@@ -120,11 +119,6 @@ export function CreateProduct() {
           </div>
         </div>
         <div>
-          {/* <div className="flex justify-end">
-            {!pictures
-              ? <img className="max-w-xs max-h-40 right-0" src={noPictures} alt="Added product" />
-              : <img className="max-w-xs max-h-40 right-0" src={pictures} alt="Added product" />}
-          </div> */}
           <div className="form-control">
             <div className="label">
               <span className="label-text">Pictures</span>
@@ -132,13 +126,6 @@ export function CreateProduct() {
             <Field name="pictures" type="url" placeholder="https://example.com/pictures.png" className="input input-bordered" />
             <ErrorMessage component="span" name="pictures" className="error" />
           </div>
-          {/* <div className="form-control">
-            <div className="label">
-              <span className="label-text">Pictures</span>
-            </div>
-            <Field name="pictures" type="url" value={pictures} onChange={(e) => setPictures(e.target.value)} placeholder="https://example.com/pictures.png" className="input input-bordered" />
-            <ErrorMessage component="span" name="pictures" className="error" />
-          </div> */}
           <div className="form-control">
             <div className="label">
               <span className="label-text">Description</span>
@@ -147,7 +134,7 @@ export function CreateProduct() {
             <ErrorMessage component="span" name="description" className="error" />
           </div>
           <div className="form-control mt-6">
-            <button type="submit" className="btn btn-secondary">Add product</button>
+            <button type="submit" className="btn btn-secondary">Update product</button>
           </div>
         </div>
       </Form>

@@ -11,12 +11,10 @@ import { useLogOut } from '../../../hooks/useLogOut'
 export function NavBar() {
   const { items } = useSelector((store) => store.cart)
   const productFavoriteIds = useSelector((store) => store.favorite)
-
   const [isModalOpen, setIsModalOpen] = useState(false)
-
   const { logOut } = useLogOut()
-
   const { user } = useSelector((store) => store.user)
+
   const openModal = () => {
     setIsModalOpen(true)
   }

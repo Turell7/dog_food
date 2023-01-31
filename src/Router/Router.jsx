@@ -2,6 +2,7 @@ import { createBrowserRouter } from 'react-router-dom'
 import App from '../App'
 import { Cart } from '../components/pages/Cart'
 import { CreateProduct } from '../components/pages/CreateProduct'
+import { EditProduct } from '../components/pages/EditProduct'
 import { FavoriteProducts } from '../components/pages/FavoriteProducts'
 import { ProductDetail } from '../components/pages/ProductDetail'
 import { Products } from '../components/pages/Products'
@@ -35,6 +36,10 @@ export const router = createBrowserRouter([
       {
         path: '/create_product',
         element: <CreateProduct />,
+      },
+      {
+        path: '/products/:id/edit',
+        element: <EditProduct />,
       },
     ],
   },
