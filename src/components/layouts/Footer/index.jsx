@@ -12,12 +12,21 @@ export function Footer() {
           </div>
           <div className={stylesFooter.center}>
             <div className={stylesFooter.text}>
-              dfsdf
+              Lorem ipsum dolor sit
+            </div>
+            <div className={stylesFooter.text}>
+              Lorem ipsum dolor sit
+            </div>
+            <div className={stylesFooter.text}>
+              Lorem ipsum dolor sit
             </div>
           </div>
           <div className={stylesFooter.center}>
             <div className={stylesFooter.text}>
               All rights reserved.
+            </div>
+            <div className={stylesFooter.text}>
+              Lorem ipsum dolor sit
             </div>
           </div>
           <div className={stylesFooter.right}>

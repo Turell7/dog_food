@@ -10,6 +10,7 @@ import { Modal } from '../../Modal/Index'
 
 export function Profile() {
   const { token } = useSelector((store) => store.user)
+  const { items } = useSelector((store) => store.cart)
   const { logOut } = useLogOut()
   const getInfoAboutMe = () => api.getInfoAboutMe()
   const [isModalOpen, setIsModalOpen] = useState(false)
@@ -73,7 +74,10 @@ export function Profile() {
         </div>
         <div className="">
           <Link to="/cart" className="px-4 py-2 pb-4 hover:bg-gray-100 flex">
-            <p className="text-sm font-medium text-gray-800 leading-none">Products in the basket</p>
+            <p className="text-sm font-medium text-gray-800 leading-none">
+              Products in the basket
+              <span className="badge badge-primary badge-md mx-0.5">{items.length}</span>
+            </p>
           </Link>
           <div className="flex justify-center">
             <button onClick={logOut} type="button" className="btn btn-wide">
